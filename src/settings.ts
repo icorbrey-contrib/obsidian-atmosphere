@@ -16,6 +16,7 @@ export interface AtProtoSettings {
 	}
 	publish: {
 		useFirstHeaderAsTitle: boolean;
+		autoInsertBskyPostRef: boolean;
 	};
 	publicationFormats: Record<string, ContentFormat>;
 	hiddenPublications: Record<string, boolean>;
@@ -30,6 +31,7 @@ export const DEFAULT_SETTINGS: AtProtoSettings = {
 	},
 	publish: {
 		useFirstHeaderAsTitle: false,
+		autoInsertBskyPostRef: true,
 	},
 	publicationFormats: {},
 	hiddenPublications: {},
@@ -170,6 +172,17 @@ export class SettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.publish.useFirstHeaderAsTitle)
 					.onChange(async (value) => {
 						this.plugin.settings.publish.useFirstHeaderAsTitle = value;
+						await this.plugin.saveSettings();
+					})
+			);
+		new Setting(containerEl)
+			.setName("Auto-insert bskyPostRef field on publish")
+			.setDesc("Adds a blank bskyPostRef frontmatter field when publishing so it is easy to fill in later")
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.publish.autoInsertBskyPostRef)
+					.onChange(async (value) => {
+						this.plugin.settings.publish.autoInsertBskyPostRef = value;
 						await this.plugin.saveSettings();
 					})
 			);

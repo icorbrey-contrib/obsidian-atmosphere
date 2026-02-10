@@ -1,6 +1,6 @@
 import { Record } from "@atcute/atproto/types/repo/listRecords";
 
-export { getRecord, deleteRecord, putRecord } from "./lib/atproto";
+export { getRecord, deleteRecord, putRecord, resolveHandle } from "./lib/atproto";
 
 export const BSKY_POST_RE = /https:\/\/bsky\.app\/profile\/([^/?#]+)\/post\/([A-Za-z0-9]+)/;
 

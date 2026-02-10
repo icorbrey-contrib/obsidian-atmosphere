@@ -42,3 +42,8 @@ export async function putRecord<T = unknown>(client: Client, repo: string, colle
 	}
 }
 
+export async function resolveHandle(client: Client, handle: string) {
+	return await client.get("com.atproto.identity.resolveHandle", {
+		params: { handle: handle as `${string}.${string}` },
+	});
+}
